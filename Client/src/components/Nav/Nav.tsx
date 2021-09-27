@@ -1,13 +1,14 @@
 import './nav.css';
+import {Link} from 'react-router-dom';
 
 function Nav() {
     return (
         <div className="nav-container">
             <div className="nav-logo">FASTCafe</div>
             <div className="nav-links">
-                <p className="link">Home</p>
-                <p className="link">Items</p>
-                <p className="link">Orders</p>
+                <Link to="/home" className="link"><p >Home</p></Link>
+                <Link to="/items" className="link"><p >Items</p></Link>
+                <Link to="/" className="link"><p >Orders</p></Link>
                 {/* login logout */}
             </div>            
         </div>
