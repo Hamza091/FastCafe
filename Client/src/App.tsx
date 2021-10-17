@@ -6,24 +6,34 @@ import Login from './components/Login/Login'
 import Nav from './components/Nav/Nav';
 import Items from './components/Items/Items';
 import Home from './components/Home/Home';
+import {useSelector} from 'react-redux'
+import { RootState } from './redux/store';
 
 function App() {
   
+  const loginCredentials = useSelector((state:RootState) => state.LoginReducer)
+
   return (
     <Router>
       <div className="App">
-            <Nav/>
-        <Switch>
-          <Route exact path="/"> 
-            <Login/>
-          </Route>
-          <Route path="/home">
-            <Home/>
-          </Route>
-          <Route path="/items">
-            <Items/>
-          </Route>
-          </Switch>
+            
+      {loginCredentials?.success?<Nav/>:null}
+          {loginCredentials?.success?
+            <Switch>
+              <Route exact path="/home">
+                <Home/>
+              </Route>
+              <Route path="/items">
+                <Items/>
+              </Route>
+            </Switch>
+              :
+            <Route exact path="/"> 
+                <Login/>
+            </Route>
+          }
+          
+          
       </div>
     </Router>
   );

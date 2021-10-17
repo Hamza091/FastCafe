@@ -1,23 +1,33 @@
 import './login.css'
 import {useState} from 'react'
 import axios from 'axios'
+import {useDispatch} from 'react-redux'
+import {LoginAction} from '../../redux/actions/LoginAction'
 
 function Login() {
     
     const [email,setEmail] = useState<string>('')
     const [password,setPassword] = useState<string>('')
     const [admin,setAdmin] = useState<boolean>(false)
+    const dispatch = useDispatch()
 
     async function handleLogin(e:any){
+        
         e.preventDefault()
         const isChecked:any=document.querySelector('.chkbx')
         setAdmin(isChecked.checked)
         const loginCredentials = JSON.stringify({email,password,admin})
-        const success:any = await axios.get('/api/login',{
+
+        const isSuccess:any = await axios.get('/api/login',{
             params:loginCredentials
         })
-        console.log(success.data.success)
-
+        
+        if(isSuccess.data.success){
+            dispatch(LoginAction(isSuccess.data))
+        }
+        else{
+            alert('Invalid Credentials...')
+        }
     }
 
     return (

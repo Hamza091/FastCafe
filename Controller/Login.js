@@ -23,7 +23,7 @@ async function Login (req,res){
 
     // if user exists
     if(user.length>0){
-        data = {...user[0][0],'success':true}
+        data = {...user[0][0],'success':true,'admin':loginCredentials.admin}
         console.log(data)
     }else{
         data = {'success':false}
