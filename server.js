@@ -1,54 +1,30 @@
 require('dotenv').config()
 const express = require('express')
-var mysql = require('mysql');
-
+const handleLogin = require('./Routes/Login')
+const bodyParser = require('body-parser')
+var mysql = require('mysql2/promise');
 const app = express()
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 const PORT = process.env.PORT || 8000
 
-var connection = mysql.createConnection({
-    host     : process.env.DB_HOST,
-    user     : process.env.DB_USER,
-    password : process.env.DB_PASSWORD,
-    database : process.env.DB_NAME,
-});
 
-connection.connect(function(err){
-    if(err){
-        console.log(err)
-        console.log("Can't connect DB...")
-    }
-    else{
-        app.listen(PORT,()=>{
-            console.log("server is up...")
-            // connection.query("CREATE TABLE user(name varchar(30),email varchar(30))",(err,rows,field)=>{
-            //     if(err){
-            //         console.log('something went wrong')
-            //     }
-            //     else{
-            //         console.log('created table')
-            //     }
-            // })
-            
-        //     connection.query("INSERT INTO user VALUES('hamza','xyz')",(err,rows,field)=>{
-        //         if(err){
-        //             console.log('something went wrong')
-        //         }
-        //         else{
-        //             console.log('created table')
-        //         }})
-            
-        //     connection.query("SELECT * FROM user",(err,rows,field)=>{
-        //         if(err){
-        //             console.log(err)
-        //         }
-        //         else{
-        //             console.log(rows)
-        //             console.log(field)
-        //         }
-        //     })
-        })
-    }
+
+var pool = mysql.createPool({
+        connectionLimit:5,
+        host     : process.env.DB_HOST,
+        user     : process.env.DB_USER,
+        password : process.env.DB_PASSWORD,
+        database : process.env.DB_NAME,
 })
 
-module.exports = connection;
+
+global.pool = pool
+app.listen(PORT,()=>{
+    console.log("server is up...")
+    
+})
+app.use('/api/login',handleLogin)
