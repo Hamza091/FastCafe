@@ -8,14 +8,13 @@ function Login() {
     
     const [email,setEmail] = useState<string>('')
     const [password,setPassword] = useState<string>('')
-    const [admin,setAdmin] = useState<boolean>(false)
     const dispatch = useDispatch()
 
     async function handleLogin(e:any){
         
         e.preventDefault()
         const isChecked:any=document.querySelector('.chkbx')
-        setAdmin(isChecked.checked)
+        const admin = isChecked.checked
         const loginCredentials = JSON.stringify({email,password,admin})
 
         const isSuccess:any = await axios.get('/api/login',{

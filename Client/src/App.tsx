@@ -19,8 +19,16 @@ function App() {
             
       {loginCredentials?.success?<Nav/>:null}
           {loginCredentials?.success?
+            loginCredentials?.admin?
+              <Switch>
+                <Route exact path="/">
+                  
+                  {/*build this component: <AdminHome/> */}
+                  </Route>
+                </Switch>
+            :
             <Switch>
-              <Route exact path="/home">
+              <Route exact path="/">
                 <Home/>
               </Route>
               <Route path="/items">
@@ -31,6 +39,7 @@ function App() {
             <Route exact path="/"> 
                 <Login/>
             </Route>
+            
           }
           
           
