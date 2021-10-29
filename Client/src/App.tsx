@@ -6,8 +6,10 @@ import Login from './components/Login/Login'
 import Nav from './components/Nav/Nav';
 import Items from './components/Items/Items';
 import Home from './components/Home/Home';
+import AdminHome from './components/AdminHome/AdminHome';
 import {useSelector} from 'react-redux'
 import { RootState } from './redux/store';
+
 
 function App() {
   
@@ -23,7 +25,8 @@ function App() {
               <Switch>
                 <Route exact path="/">
                   
-                  {/*build this component: <AdminHome/> */}
+                  <AdminHome/>
+                   
                   </Route>
                 </Switch>
             :
