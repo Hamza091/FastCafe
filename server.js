@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const handleLogin = require('./Routes/Login')
 const bodyParser = require('body-parser')
+const {createClient} = require('@supabase/supabase-js')
 var mysql = require('mysql2/promise');
 const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -11,20 +12,9 @@ app.use(bodyParser.json())
 
 const PORT = process.env.PORT || 8000
 
-
-
-var pool = mysql.createPool({
-        connectionLimit:5,
-        host     : process.env.DB_HOST,
-        user     : process.env.DB_USER,
-        password : process.env.DB_PASSWORD,
-        database : process.env.DB_NAME,
-})
-
-
-global.pool = pool
+const supabase = createClient('https://yvwetawhxztjsjgaxuon.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNTQ4NTU4NSwiZXhwIjoxOTUxMDYxNTg1fQ.OApMwM_MiVg33icr0Y6Llzw-dl9sIC8rHY2D2g9MKZw')
+global.supabase=supabase
 app.listen(PORT,()=>{
-    console.log("server is up...")
-    
+    console.log("server is up...")    
 })
 app.use('/api/login',handleLogin)
