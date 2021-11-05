@@ -1,13 +1,16 @@
 import './items.css';
 
 function Items() {
+    const AddItem = ()=>{
+        console.log('check')        
+    } 
     return (
         <div className="customer-main">
             <div className="contents">
-                <button className="btn btn-success btn-lg btn-txt">Add Item</button>
+                <button className="btn btn-success btn-lg btn-txt" onClick={AddItem}>Add Item</button>
             
             <div className="head">
-                Items
+                Items   
             </div>
             <table id="customers">
                 <tr>

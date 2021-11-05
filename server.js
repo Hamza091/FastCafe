@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const handleLogin = require('./Routes/Login')
+const handleItem = require('./Routes/Item')
 const bodyParser = require('body-parser')
 const {createClient} = require('@supabase/supabase-js')
 //var mysql = require('mysql2/promise');
@@ -19,3 +20,4 @@ app.listen(PORT,()=>{
     console.log("server is up...")    
 })
 app.use('/api/login',handleLogin)
+app.use('/api/Item',handleItem)

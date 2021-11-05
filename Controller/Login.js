@@ -8,16 +8,17 @@ async function Login (req,res){
     const tableName = loginCredentials.admin?'admin':'cafetarian' 
     let data //data to be send will be stored in this
     try{
-        var user = await db.from(tableName).select(`*`).match({email:loginCredentials.email,password:loginCredentials.password})
-        console.log(user)
+        var user = await db.from(tableName).select(`*`).match({email:loginCredentials.email,password:loginCredentials.password}).limit(1)
+        
     }
     catch(err){
         console.log(err)
+        data = {'success':false}
     }
         
     if(user.data.length>0){
-        data = {...user[0],'success':true,'admin':loginCredentials.admin}
-        console.log(data)
+        data = {...user.data[0],'success':true,'admin':loginCredentials.admin}
+       console.log(data)
     }else{
         data = {'success':false}
     }
