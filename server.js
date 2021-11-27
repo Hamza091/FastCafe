@@ -4,6 +4,7 @@ const handleLogin = require('./Routes/Login')
 const handleItem = require('./Routes/Item')
 const handleCafetarian = require('./Routes/Cafetarian')
 const bodyParser = require('body-parser')
+const path = require('path')
 const {createClient} = require('@supabase/supabase-js')
 const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -24,3 +25,8 @@ app.listen(PORT,()=>{
 app.use('/api/login',handleLogin)
 app.use('/api/Item',handleItem)
 app.use('/api/Cafetarian',handleCafetarian)
+
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "Client", "build", "index.html"));
+});
+
