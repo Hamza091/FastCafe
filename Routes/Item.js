@@ -1,8 +1,8 @@
 const express = require('express')
-const addItem  = require('../Controller/AddItem')
-const updateItem = require('../Controller/UpdateItem')
-const deleteItem = require('../Controller/DeleteItem')
-const retrieveItem = require('../Controller/RetrieveItem')
+const addItem  = require('../Controller/Items/AddItem')
+const updateItem = require('../Controller/Items/UpdateItem')
+const deleteItem = require('../Controller/Items/DeleteItem')
+const retrieveItem = require('../Controller/Items/RetrieveItem')
 
 const router = express.Router()
 

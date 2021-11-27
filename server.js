@@ -2,9 +2,9 @@ require('dotenv').config()
 const express = require('express')
 const handleLogin = require('./Routes/Login')
 const handleItem = require('./Routes/Item')
+const handleCafetarian = require('./Routes/Cafetarian')
 const bodyParser = require('body-parser')
 const {createClient} = require('@supabase/supabase-js')
-//var mysql = require('mysql2/promise');
 const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -23,3 +23,4 @@ app.listen(PORT,()=>{
 
 app.use('/api/login',handleLogin)
 app.use('/api/Item',handleItem)
+app.use('/api/Cafetarian',handleCafetarian)
