@@ -17,7 +17,9 @@ const supabase = createClient('https://yvwetawhxztjsjgaxuon.supabase.co','eyJhbG
 global.supabase=supabase
 
 app.listen(PORT,()=>{
-    console.log("server is up...")    
+    console.log("server is live...")
+        
 })
+
 app.use('/api/login',handleLogin)
 app.use('/api/Item',handleItem)

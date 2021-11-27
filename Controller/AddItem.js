@@ -3,8 +3,10 @@ async function addItem(req,res){
     const itemDetails = req.body
     let data
     try{
-        var item = await db.from('items').insert([{iname:itemDetails.iname,price:itemDetails.price,quantity:itemDetails.quantity}])
-    }
+        var item = await db.from('item').insert(
+            [{iname:itemDetails.iname,price:itemDetails.price,available_qty:itemDetails.available_qty,rating:itemDetails.rating}])
+            
+        }
     catch(err){
         console.log(err)
         data={'success':false}
