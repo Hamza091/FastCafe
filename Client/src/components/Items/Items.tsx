@@ -6,6 +6,38 @@ function Items() {
     } 
     return (
         <div className="customer-main">
+            
+            <div className="addItems">
+                <div className="cross">
+                    X
+                </div>            
+                <div className="itm-details">
+                <div className="itm-lbl">
+                    <label >Id: </label>
+                    <input className="itm-input"/>
+                </div>
+                <div className="itm-lbl">
+                    <label >Name: </label>
+                    <input className="itm-input"/>
+                </div>
+                <div className="itm-lbl">
+                    <label >Price: </label>
+                    <input className="itm-input"/>
+                </div>
+                <div className="itm-lbl">
+                    <label >Quantity: </label>
+                    <input className="itm-input"/>
+                </div>
+                <div className="itm-lbl">
+                    <label >Category: </label>
+                    <input className="itm-input"/>
+                </div>
+                <div className="btn-md">
+                    <button className="bn">Add Item</button>
+                </div>
+                </div>
+            </div>
+
             <div className="contents">
                 <button className="btn btn-success btn-lg btn-txt" onClick={AddItem}>Add Item</button>
             
