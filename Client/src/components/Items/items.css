@@ -1,15 +1,17 @@
+
 .contents{
   display: flex;
-  margin: auto auto;
+  /* margin: auto auto; */
   /* border: 1px solid green; */
   flex-direction: column;
   width: 55%;
+  position: relative;
+  top: -43px;
 }
 .customer-main{
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding-top: 5rem;
 }
 .head{
     display: flex;
@@ -24,6 +26,10 @@
     letter-spacing: 0.8px;
     font-weight: 800;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+.scrollist{
+  overflow: scroll;
+  height: 45rem;
 } 
 #customers {
 
@@ -35,6 +41,8 @@
     width: 100%;
     /* margin: auto auto; */
     margin-top: 4rem;
+    margin-bottom:10rem;
+    
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   }
   
@@ -99,6 +107,7 @@
       box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
       z-index: 5;
       border-radius: 15px;
+      display: none;
   }
 
   .itm-lbl{
@@ -113,6 +122,7 @@
     position: relative;
     top: 15%;
     width: 60%;
+    left: 20%;
   }
 
   .itm-input{
@@ -129,7 +139,7 @@
       padding: 15px 32px;
       text-align: center;
       text-decoration: none;
-      display: inline-block;
+      display: block;
       font-size: 1.5rem;
       font-weight: bolder;
       letter-spacing: 0.1rem;

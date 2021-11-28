@@ -1,20 +1,22 @@
 async function deleteItem(req,res){
     db = global.supabase
-    const itemDetails = req.body
+    const itemDetails = JSON.parse(req.query.item)
+   console.log(itemDetails)
     let data
     try{
         var item = await db.from('item')
-        .delete().match({item_id:itemDetails.item_id})
+        .delete().eq('item_id',itemDetails.item_id)
+        console.log(item)
     }
     catch(err){
         console.log(err)
-        data={'success':false}
+        data=[{},{'success':false}]
     }
     if(item.data.length>0){
-        data = {...item.data,'success':true}
+        data = [{...item.data},{'success':true}]
         console.log(data)
     }else{
-        data = {'success':false}
+        data=[{},{'success':false}]
     }
 
     res.send(data)

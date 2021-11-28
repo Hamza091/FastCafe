@@ -7,11 +7,11 @@ async function retrieveItem(req,res){
     }
     catch(err){
         console.log(err)
-        data={'success':false}
+        data=[[],{'success':false}]
         res.send(data)
     }
         
-    data = {...items.data,'success':true}
+    data = [[...items.data],{'success':true}]
     console.log(data)
     
 
