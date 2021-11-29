@@ -1,6 +1,7 @@
 async function addCafetarian(req,res){
     db = global.supabase
-    const cafetarianDetails = req.body
+    console.log(req.body)
+    const cafetarianDetails = JSON.parse(req.body.cafetarian)
     let data
     try{
         var cafetarian = await db.from('cafetarian').insert([{
@@ -13,16 +14,17 @@ async function addCafetarian(req,res){
             hire_date:cafetarianDetails.hire_date,
             registered_by:cafetarianDetails.registered_by
         }])
+        console.log(cafetarian)
     }
     catch(err){
         console.log(err)
-        data={'success':false}
+        data=[{},{'success':false}]
     }
     if(cafetarian.data.length>0){
-        data = {...cafetarian.data[0],'success':true}
+        data = [{...cafetarian.data[0]},{'success':true}]
         console.log(data)
     }else{
-        data = {'success':false}
+        data = [{},{'success':false}]
     }
 
     res.send(data)

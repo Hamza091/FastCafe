@@ -1,8 +1,8 @@
-import {useState,useEffect} from 'react'
+import {useState} from 'react'
 import axios from 'axios'
 import './items.css';
 import {useDispatch} from 'react-redux'
-import {RetrieveItemsAction} from '../../redux/actions/RetrieveItemsAction'
+
 import {AddItemAction} from '../../redux/actions/AddItemAction'
 import {useSelector} from 'react-redux'
 import { RootState } from '../../redux/store';
@@ -22,9 +22,7 @@ function Items() {
     const dispatch = useDispatch()
     const Items = useSelector((state:RootState) => state.ItemReducer)
     
-    useEffect(() => {
-        RetrieveItems()
-    }, [])
+  
     
     const ChangeItemDiv = (state:string) =>{
         let itmDiv:any = document.querySelector('.addItems')
@@ -37,13 +35,7 @@ function Items() {
             setAvailableQty(0)
     }
 
-    async function RetrieveItems(){
-        
-        const items:any = await axios.get('/api/Item/retrieveItem')
-        console.log(items.data)
-        dispatch(RetrieveItemsAction(items.data[0]))
-        console.log(Items)
-    }
+    
 
     async function AddItem(){
          
@@ -108,11 +100,19 @@ function Items() {
 
     }
 
+    function HandleAddItem (){
+            setBtn("Add Item")
+            setIname('')
+            setPrice(0)
+            setAvailableQty(0)
+            ChangeItemDiv("block")
+    }
+
     return (
         <div className="customer-main">
             
             <div className="contents">
-                <button className="btn btn-success btn-lg btn-txt" onClick={()=>ChangeItemDiv("block")}>Add Item</button>
+                <button className="btn btn-success btn-lg btn-txt" onClick={()=>HandleAddItem()}>Add Item</button>
             
             <div className="head">
                 Items   

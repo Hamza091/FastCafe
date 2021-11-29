@@ -1,6 +1,6 @@
 async function deleteCafetarian(req,res){
     db = global.supabase
-    const cafetarianDetails = req.body
+    const cafetarianDetails = JSON.parse(req.query.cafetarian)
     let data
     try{
         var cafetarian = await db.from('cafetarian')
@@ -8,15 +8,14 @@ async function deleteCafetarian(req,res){
     }
     catch(err){
         console.log(err)
-        data={'success':false}
+        data=[{},{'success':false}]
     }
     if(cafetarian.data.length>0){
-        data = {...cafetarian.data[0],'success':true}
+        data = [{...cafetarian.data},{'success':true}]
         console.log(data)
     }else{
-        data = {'success':false}
+        data=[{},{'success':false}]
     }
-
     res.send(data)
 
 }

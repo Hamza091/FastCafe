@@ -3,3 +3,7 @@ export const Retrieve_Items = 'Retrieve_Items';
 export const Add_Item = 'Add_Item';
 export const Update_Item = 'Update_Item';
 export const Delete_Item = 'Delete_Item';
+export const Retrieve_Cafetarian = 'Retrieve_Cafetarian';
+export const Add_Cafetarian = 'Add_Cafetarian';
+export const Update_Cafetarian = 'Update_Cafetarian';
+export const Delete_Cafetarian = 'Delete_Cafetarian';

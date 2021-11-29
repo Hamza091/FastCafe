@@ -1,9 +1,9 @@
 .contents{
     display: flex;
     margin: auto auto;
-    /* border: 1px solid green; */
     flex-direction: column;
     width: 55%;
+    /* top: 0px; */
   }
   .customer-main{
       display: flex;

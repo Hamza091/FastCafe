@@ -6,12 +6,13 @@ async function retrieveCafetarian(req,res){
     }
     catch(err){
         console.log(err)
-        data={'success':false}
+        data=[[],{'success':false}]
+        res.send(data)
     }
-    
-    data = {...cafetarians.data,'success':true}
+        
+    data = [[...cafetarians.data],{'success':true}]
     console.log(data)
-
+    
     res.send(data)
 
 }
