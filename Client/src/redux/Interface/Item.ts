@@ -5,4 +5,6 @@ export interface Iitem {
     available_qty:number,
     rating:number,
     price:number,
+    // category:Array<string>;
+
 }

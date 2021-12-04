@@ -4,7 +4,7 @@ async function addCafetarian(req,res){
     const cafetarianDetails = JSON.parse(req.body.cafetarian)
     let data
     try{
-        var cafetarian = await db.from('cafetarian').insert([{
+        var cafetarian = await db.from('cafeterian').insert([{
             email:cafetarianDetails.email,
             password:cafetarianDetails.password,
             fname:cafetarianDetails.fname,

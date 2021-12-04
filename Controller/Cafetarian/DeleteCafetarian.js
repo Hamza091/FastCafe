@@ -3,7 +3,7 @@ async function deleteCafetarian(req,res){
     const cafetarianDetails = JSON.parse(req.query.cafetarian)
     let data
     try{
-        var cafetarian = await db.from('cafetarian')
+        var cafetarian = await db.from('cafeterian')
         .delete().match({email:cafetarianDetails.email})
     }
     catch(err){

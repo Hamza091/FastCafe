@@ -5,11 +5,11 @@ async function Login (req,res){
     db = global.supabase
     
     const loginCredentials = JSON.parse(req.query[0])
-    const tableName = loginCredentials.admin?'admin':'cafetarian' 
+    const tableName = loginCredentials.admin?'admin':'cafeterian' 
     let data //data to be send will be stored in this
     try{
         var user = await db.from(tableName).select(`*`).match({email:loginCredentials.email,password:loginCredentials.password}).limit(1)
-        
+        // console.log(user)
     }
     catch(err){
         console.log(err)

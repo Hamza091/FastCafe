@@ -3,7 +3,7 @@ async function updateCafetarian(req,res){
     const cafetarianDetails = JSON.parse(req.body.cafetarian)
     let data
     try{
-        var cafetarian = await db.from('cafetarian')
+        var cafetarian = await db.from('cafeterian')
         .update({
             password:cafetarianDetails.password,
             fname:cafetarianDetails.fname,
