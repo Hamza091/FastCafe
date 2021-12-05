@@ -5,15 +5,25 @@ import { RootState } from '../../redux/store'
 import {RetrieveItemsAction} from '../../redux/actions/RetrieveItemsAction'
 import {useDispatch} from 'react-redux'
 import './home.css';
+import { RetrieveCategoryAction } from '../../redux/actions/RetrieveCategoryAction'
 
 function Home() {
 
     const dispatch = useDispatch()
     const Items = useSelector((state:RootState) => state.ItemReducer)
-
+    const category = useSelector((state:RootState)=>state.CategoryReducer)
+    
     useEffect(() => {
         RetrieveItems()
+        RetrieveCategory()
     }, [])
+
+    async function RetrieveCategory(){
+        const category:any = await axios.get('/api/Item/retrieveCategory')
+  
+        dispatch(RetrieveCategoryAction(category.data[0]))
+      
+    }
 
     async function RetrieveItems(){
         
@@ -40,8 +50,14 @@ function Home() {
                             <td>{item.iname}</td>
                             <td>{item.price}</td>
                             <td>{item.available_qty}</td>
-                                {/* category to be implemented */}
-                            <td>xyz</td> 
+                            <td>
+                                <select >
+                                    {
+                                        
+                                        category.map(cat=><option value={cat.cat_id}>{cat.cat_name}</option>)
+                                    }
+                                </select>
+                            </td>
                             
                         </tr>)
                     }

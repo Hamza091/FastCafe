@@ -4,6 +4,8 @@ async function retrieveItem(req,res){
     try{
         //var items = await db.from('item').select('*')
          var items = await db.from('item').select(`*,item_category(cat_id,item_id),category(cat_id,cat_name)`)
+        //  var items_cat = await db.from('item_category').select('*')
+        // console.log(items_cat)
          //var category.eq('item_category.cat_id','category.cat_id')
         console.log(items)
         

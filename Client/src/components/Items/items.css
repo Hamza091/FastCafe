@@ -90,7 +90,7 @@
   .btn-txt{
       font-size: 1.9rem;
       background-color: rgb(61, 201, 61);
-      width: 17%;
+      width: 18.5%;
   }
   .addItems{
       position: absolute;
@@ -163,4 +163,24 @@
     right: 2.5%;
     top: 3%;
     cursor: pointer;
+  }
+  .top-btns{
+    display: flex;
+    flex-direction: row;
+  }
+  .select {
+    width: 300px;
+  }
+  
+  .select option {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .category {
+    padding: 6px 30px;
+    margin: 10px;
+    background: orange;
+    display: inline-block;
+    border-radius: 100px;
   }

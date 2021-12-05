@@ -11,11 +11,8 @@ async function addItem(req,res){
             //     item_id:2,
             //     iname:'check',
             //     item_category:[{cat_id:1,item_id:0},{cat_id:1,item_id:0}]
-            //     category:[{cat_name:"fds"},{cat_name:"fds"}]
             // }
-            if(itemDetails.category.length>0){
-                var cat = await db.from('category').insert(itemDetails.category)
-            }
+            
             if(itemDetails.item_category.length>0){
                 const id = item.data[0].item_id
 

@@ -13,6 +13,7 @@ function Nav() {
                     
                     <div className="nav-links">
                         <Link to="/" className="link"><p >Home</p></Link>
+                        <a href="/" className="a-link">Logout</a>
                     </div>
                     
                     :
@@ -21,10 +22,10 @@ function Nav() {
                         <Link to="/" className="link"><p >Home</p></Link>
                         <Link to="/items" className="link"><p >Items</p></Link>
                         <Link to="/" className="link"><p >Orders</p></Link>
+                        <a href="/" className="a-link">Logout</a>       
                     </div>
                 }
-
-                {/* login logout */}       
+                
         </div>
     )
 }

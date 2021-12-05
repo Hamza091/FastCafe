@@ -28,6 +28,21 @@
     text-decoration: none;
     color: rgb(255, 255, 255);
 }
+.a-link{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-wrap: wrap;
+    /* display: inline-block; */
+    margin: auto 0px;
+    margin-right: 2rem;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    margin-bottom: 4.3rem;
+}
+a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
 .link:hover{
     color: rgb(209, 204, 204);
 }

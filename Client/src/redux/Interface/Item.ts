@@ -1,3 +1,5 @@
+import { Icategory } from "./Category";
+
 export interface Iitem {
     
     item_id:number,
@@ -5,6 +7,6 @@ export interface Iitem {
     available_qty:number,
     rating:number,
     price:number,
-    // category:Array<string>;
+    item_category:Array<Icategory>;
 
 }

@@ -8,6 +8,8 @@ interface Iaction{
     payload:Array<Iitem>
 }
 
+
+
 export const ItemReducer = (state=initialState,action:Iaction & {payload:number})=>{
     switch(action.type){
 

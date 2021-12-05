@@ -8,13 +8,26 @@ async function updateItem(req,res){
         .eq(
             'item_id',itemDetails.item_id
         )
+        if(itemDetails.item_category.length>0){
+            const id = itemDetails.item_id
+            
+            var cat = await db.from('item_category')
+            .delete().eq('item_id',id)
+        
+            let itm_category = []
+            for(i=0;i<itemDetails.item_category.length;i++){
+                itm_category = [...itm_category,{"cat_id":itemDetails.item_category[i].cat_id,"item_id":id}]
+            }
+            cat = await db.from('item_category').insert(itm_category)
+           
+        }
     }
     catch(err){
         console.log(err)
         data=[{},{'success':false}]
     }
     if(item.data.length>0){
-        data = [{...item.data[0]},{'success':true}]
+        data = [{...itemDetails},{'success':true}]
         console.log(data)
     }else{
         data = [{},{'success':false}]

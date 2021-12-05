@@ -9,22 +9,25 @@ import { RootState } from '../../redux/store';
 import { Iitem } from '../../redux/Interface/Item';
 import { UpdateItemAction } from '../../redux/actions/UpdateItemAction';
 import {DeleteItemAction} from '../../redux/actions/DeleteItemAction'
+import Select from 'react-select'
+import { AddCategory } from '../../redux/actions/AddCategoryAction';
+import { Icategory } from '../../redux/Interface/Category';
 
 function Items() {
     
+    
+
     const [iname, setIname] = useState<string>('')
     const [price,setPrice] = useState<number>(0)
     const [available_qty,setAvailableQty] = useState<number>(0)
     const [item_id,setItemId] = useState<number>()
-    const [btn,setBtn] = useState<string>("Add Item") 
-   
-
-    //category [to be implemented]
+    const [btn,setBtn] = useState<string>("Add Item")
+    const [catg,setCatg] = useState<any>([]) 
+    
     const dispatch = useDispatch()
     const Items = useSelector((state:RootState) => state.ItemReducer)
-    
-  
-    
+    const category = useSelector((state:RootState)=>state.CategoryReducer)
+ 
     const ChangeItemDiv = (state:string) =>{
         let itmDiv:any = document.querySelector('.addItems')
         itmDiv.style.display = state
@@ -34,14 +37,18 @@ function Items() {
             setIname("")
             setPrice(0)
             setAvailableQty(0)
+            setCatg([])
     }
 
-    
 
     async function AddItem(){
          
         setBtn("Add Item")
-        const item = JSON.stringify({iname,price,available_qty})
+        let item_category:Array<Icategory> = []
+        for(let i=0; i<catg.length; i++){
+            item_category = [...item_category,{"cat_id":catg[i].value,"cat_name":catg[i].label}]
+        }
+        const item = JSON.stringify({iname,price,available_qty,item_category})
 
         const isSuccess:any = await axios.post('/api/Item/addItem',{item})
         
@@ -66,12 +73,31 @@ function Items() {
             setPrice(item.price)
             setItemId(item.item_id)
             setAvailableQty(item.available_qty)
+            let itm:Array<any> = []
+            console.log(item)
+            let cat_name = null
+            for(let i=0; i<item.item_category.length; i++){
+                
+                cat_name = category.map(itm=>item.item_category[i].cat_id===itm.cat_id?itm.cat_name:null)
+                
+                itm = [...itm,{"label":cat_name,"value":item.item_category[i].cat_id}]
+            }
+            console.log(itm)
+            setCatg(itm)
             ChangeItemDiv('block')
 
     }
+    
+    
 
     async function UpdateItem(){
-        const item= JSON.stringify({iname,item_id,price,available_qty})
+
+        let item_category:Array<Icategory> = []
+        for(let i=0; i<catg.length; i++){
+            item_category = [...item_category,{"cat_id":catg[i].value,"cat_name":catg[i].label}]
+        }
+
+        const item= JSON.stringify({iname,item_id,price,available_qty,item_category})
         const res:any = await axios.put('/api/Item/updateItem',{item})
         
         if(res.data[1].success){
@@ -108,13 +134,47 @@ function Items() {
             setAvailableQty(0)
             ChangeItemDiv("block")
     }
+    
+    // function GetValue(){
+    //     for(let i=0; i<catg.length; i++){
 
+    //     }
+    // }
+
+    async function HandleAddCategory(){
+        
+        let cat_name:any = prompt("Category Name: ")
+        if(cat_name){
+            const category = JSON.stringify({cat_name})
+            
+            if(cat_name.length>0){
+                const res:any = await axios.post('/api/Item/addCategory',{category})
+
+                if(res.data[1].success){
+                    alert('Category added...')
+                    dispatch(AddCategory(res.data[0]))
+                }
+                else{
+                    alert('Invalid category..')
+                }
+            }
+            else{
+                alert('Invalid Input')
+            }
+    }
+
+    
+    
+    }
+        
     return (
         <div className="customer-main">
             
             <div className="contents">
-                <button className="btn btn-success btn-lg btn-txt" onClick={()=>HandleAddItem()}>Add Item</button>
-            
+                <div className="top-btns">
+                    <button className="btn btn-success btn-lg btn-txt" onClick={()=>HandleAddItem()}>Add Item</button>
+                    <button className="btn btn-success btn-lg btn-txt" onClick={()=>HandleAddCategory()}>Add Category</button>
+                </div>
             <div className="head">
                 Items   
             </div>
@@ -134,8 +194,14 @@ function Items() {
                             <td>{item.iname}</td>
                             <td>{item.price}</td>
                             <td>{item.available_qty}</td>
-                                {/* category to be implemented */}
-                            <td>xyz</td> 
+                            <td>
+                                <select >
+                                    {
+                                        
+                                        category.map(cat=><option value={cat.cat_id}>{cat.cat_name}</option>)
+                                    }
+                                </select>
+                            </td>
                             <td>
                             <div className="btn-container">
                                 <button className="btn btn-primary btn-lg btn-wid" onClick={()=>HandleUpdateItem(item)}>Update</button>
@@ -168,10 +234,11 @@ function Items() {
                     <label >Quantity: </label>
                     <input type="number" className="itm-input" value={available_qty} onChange={(e)=>{setAvailableQty(parseInt(e.target.value))}}/>
                 </div>
-                {/* tobe changed */}
+                
                 <div className="itm-lbl">
-                    <label >Category: </label>
-                    <input className="itm-input"/>
+                     
+                     <label >Category: </label>
+                     <Select isMulti value={catg} onChange={(e)=>{setCatg(e)}} options={category.map(cat=>({"value":cat.cat_id,"label":cat.cat_name}))}></Select>
                 </div>
 
                 <div className="btn-md">
