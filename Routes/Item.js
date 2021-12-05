@@ -3,8 +3,8 @@ const addItem  = require('../Controller/Items/AddItem')
 const updateItem = require('../Controller/Items/UpdateItem')
 const deleteItem = require('../Controller/Items/DeleteItem')
 const retrieveItem = require('../Controller/Items/RetrieveItem')
-const addCategory = require('../Controller/Items/Addcategory')
-const retrieveCategory = require('../Controller/Items/Retrievecategory')
+const addCategory = require('../Controller/Items/AddCategory')
+const retrieveCategory = require('../Controller/Items/RetrieveCategory')
 
 const router = express.Router()
 
