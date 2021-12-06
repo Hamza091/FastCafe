@@ -4,11 +4,12 @@ async function deleteItem(req,res){
    console.log(itemDetails)
     let data
     try{
+        var cat = await db.from('item_category')
+        .delete().eq('item_id',itemDetails.item_id)
+        
         var item = await db.from('item')
         .delete().eq('item_id',itemDetails.item_id)
         
-        // var cat = await db.from('item_category')
-        // .delete().eq('item_id',itemDetails.item_id)
 
         console.log(item)
     }

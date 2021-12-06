@@ -12,6 +12,7 @@ import {DeleteItemAction} from '../../redux/actions/DeleteItemAction'
 import Select from 'react-select'
 import { AddCategory } from '../../redux/actions/AddCategoryAction';
 import { Icategory } from '../../redux/Interface/Category';
+import { matchPath } from 'react-router-dom';
 
 function Items() {
     
@@ -135,11 +136,14 @@ function Items() {
             ChangeItemDiv("block")
     }
     
-    // function GetValue(){
-    //     for(let i=0; i<catg.length; i++){
-
-    //     }
-    // }
+  
+    function mapCat(itm:any){
+        for(let i=0; i<category.length; i++){
+            if(itm.cat_id===category[i].cat_id){
+                return category[i].cat_name
+            }
+        }
+    }
 
     async function HandleAddCategory(){
         
@@ -197,9 +201,10 @@ function Items() {
                             <td>
                                 <select >
                                     {
+                                        item.item_category.map(itm=><option>{mapCat(itm)}</option>)
                                         
-                                        category.map(cat=><option value={cat.cat_id}>{cat.cat_name}</option>)
                                     }
+                                    
                                 </select>
                             </td>
                             <td>

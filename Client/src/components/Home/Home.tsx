@@ -18,6 +18,14 @@ function Home() {
         RetrieveCategory()
     }, [])
 
+    function mapCat(itm:any){
+        for(let i=0; i<category.length; i++){
+            if(itm.cat_id===category[i].cat_id){
+                return category[i].cat_name
+            }
+        }
+    }
+
     async function RetrieveCategory(){
         const category:any = await axios.get('/api/Item/retrieveCategory')
   
@@ -53,9 +61,10 @@ function Home() {
                             <td>
                                 <select >
                                     {
+                                        item.item_category.map(itm=><option>{mapCat(itm)}</option>)
                                         
-                                        category.map(cat=><option value={cat.cat_id}>{cat.cat_name}</option>)
                                     }
+                                    
                                 </select>
                             </td>
                             
