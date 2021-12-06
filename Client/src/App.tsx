@@ -6,6 +6,7 @@ import Login from './components/Login/Login'
 import Nav from './components/Nav/Nav';
 import Items from './components/Items/Items';
 import Home from './components/Home/Home';
+import Order from './components/Order/Order';
 import AdminHome from './components/AdminHome/AdminHome';
 import {useSelector} from 'react-redux'
 import { RootState } from './redux/store';
@@ -36,6 +37,9 @@ function App() {
               </Route>
               <Route path="/items">
                 <Items/>
+              </Route>
+              <Route path="/orders">
+                <Order/>
               </Route>
             </Switch>
               :

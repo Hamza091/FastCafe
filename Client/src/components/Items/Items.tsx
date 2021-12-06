@@ -1,4 +1,4 @@
-import {useState,useEffect} from 'react'
+import {useState} from 'react'
 import axios from 'axios'
 import './items.css';
 import {useDispatch} from 'react-redux'
@@ -12,7 +12,7 @@ import {DeleteItemAction} from '../../redux/actions/DeleteItemAction'
 import Select from 'react-select'
 import { AddCategory } from '../../redux/actions/AddCategoryAction';
 import { Icategory } from '../../redux/Interface/Category';
-import { matchPath } from 'react-router-dom';
+
 
 function Items() {
     
