@@ -9,3 +9,4 @@ export const Update_Cafetarian = 'Update_Cafetarian';
 export const Delete_Cafetarian = 'Delete_Cafetarian';
 export const Add_Category = 'Add_Category';
 export const Retrieve_Category = 'Retrieve_Category';
+export const Retrieve_Order = 'Retrieve_Order';

@@ -16,8 +16,8 @@ app.use(express.static('./Client/build'))
 
 const PORT = process.env.PORT || 8000
 
- const supabase = createClient('https://yvwetawhxztjsjgaxuon.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNTQ4NTU4NSwiZXhwIjoxOTUxMDYxNTg1fQ.OApMwM_MiVg33icr0Y6Llzw-dl9sIC8rHY2D2g9MKZw')
-// const supabase = createClient('https://bskteeklvsixrtwmuqbp.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNjY2OTY2NSwiZXhwIjoxOTUyMjQ1NjY1fQ.airXVJ1JRpY4niP_S8YPRaUUmY7Tza_AhMwkWFijpNE')
+//  const supabase = createClient('https://yvwetawhxztjsjgaxuon.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNTQ4NTU4NSwiZXhwIjoxOTUxMDYxNTg1fQ.OApMwM_MiVg33icr0Y6Llzw-dl9sIC8rHY2D2g9MKZw')
+const supabase = createClient('https://bskteeklvsixrtwmuqbp.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNjY2OTY2NSwiZXhwIjoxOTUyMjQ1NjY1fQ.airXVJ1JRpY4niP_S8YPRaUUmY7Tza_AhMwkWFijpNE')
 
 global.supabase=supabase
 
