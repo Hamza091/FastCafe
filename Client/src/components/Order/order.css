@@ -43,3 +43,19 @@
     font-family: Arial, Helvetica, sans-serif;
     padding-left: 1rem;
 }
+
+.btn-container-order{
+    /* border: 1px solid red; */
+    display: flex;
+    width: 60%;
+    margin-top: 1rem;
+}
+.completed-p{
+    color: green;
+    /* border: 1px solid red; */
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: .6px;
+    float: right;
+    padding-right: 5rem;
+}

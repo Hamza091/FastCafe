@@ -4,6 +4,7 @@ import {useDispatch,useSelector} from 'react-redux'
 import axios from 'axios'
 import { RootState } from '../../redux/store'
 import { RetrieveOrderAction } from '../../redux/actions/RetrieveOrderAction'
+import { UpdateOrderStatusAction } from '../../redux/actions/UpdateOrderStatusAction'
 import { IOrder } from '../../redux/Interface/Order'
 
 function Order() {
@@ -34,6 +35,22 @@ function Order() {
         }
     }
 
+    async function ChangeOrderStatus(uorder:any,status:any){
+        const order_id = uorder.order_id
+        const order= JSON.stringify({order_id,status})
+        const res:any = await axios.put('/api/Order/updateStatus',{order})
+        if(res.data[1].success){
+            uorder.status=status
+
+            dispatch(UpdateOrderStatusAction(uorder))
+            
+        }
+        else{
+            alert("Invalid order....")
+        }
+    }
+
+
     return (
         <div className="order-container">
             
@@ -47,7 +64,7 @@ function Order() {
                     </div>
                     <div>
                         <span><b>Name: </b></span>
-                        <span>{order.students.fname}</span>
+                        <span>{order.students.first_name}</span>
                     </div>
                     <div>
                         <span><b>Description: </b></span>
@@ -78,46 +95,25 @@ function Order() {
                     </div>
                 </div>)
                 }
+                {
+                    order.status==='I'?
+                    <div className="btn-container-order">
+                        
+                            <button className="btn btn-success btn-lg btn-wid" onClick={()=>{ChangeOrderStatus(order,"R")}}>Ready</button>
+                            <button className="btn btn-primary btn-lg btn-wid" onClick={()=>{ChangeOrderStatus(order,"C")}}>Completed</button>
+                        
+                    </div>:order.status==='R'?<div className="btn-container-order">
+                        <button className="btn btn-primary btn-lg btn-wid" onClick={()=>{ChangeOrderStatus(order,"C")}}>Completed</button>
+                    <p className="completed-p">Order is Ready</p>
                     
+                </div>:<p className="completed-p">Completed</p>
+                    
+                }
+                
             </div>  
 ))
             }            
-            {/* <div className="order-card">
-                <div className="order-details">
-                    <div>
-                        <span>Order Id: </span>
-                        <span>1234</span>
-                    </div>
-                    <div>
-                        <span>Name: </span>
-                        <span>Hamza</span>
-                    </div>
-                    <div>
-                        <span>Total Amount: </span>
-                        <span>1234</span>
-                    </div>
-                    <div>
-                        <span>Status: </span>
-                        <span>Completed</span>
-                    </div>
-                </div>
-                <div className="order-items">
-                        <div>
-                            <span>Item Name: </span>
-                            <span>abc</span>
-                        </div>
-                        <div>
-                            <span>Quantity: </span>
-                            <span>1234</span>
-                        </div>
-                        <div>
-                            <span>Price: </span>
-                            <span>120</span>
-                        </div>
-                    </div>
                     
-            </div> */}
-        
         </div>
     )
 }
