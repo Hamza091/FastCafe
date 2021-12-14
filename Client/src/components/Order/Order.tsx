@@ -21,6 +21,7 @@ function Order() {
 
     useEffect(() => {
         RetrieveOrder()
+        setshowOrders(orders)
     }, [])
     
     async function RetrieveOrder(){
