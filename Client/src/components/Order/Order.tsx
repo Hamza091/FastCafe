@@ -1,4 +1,4 @@
-import {useEffect} from 'react'
+import {useEffect,useState} from 'react'
 import './order.css'
 import {useDispatch,useSelector} from 'react-redux'
 import axios from 'axios'
@@ -11,6 +11,8 @@ function Order() {
     
     const dispatch = useDispatch()
     const orders:Array<IOrder>  = useSelector((state:RootState)=>state.OrderReducer)
+    // var showOrders:Array<IOrder> = orders
+    const [showOrders, setshowOrders] = useState<Array<IOrder>>(orders)
     // F failed
     // I in progress
     // C Completed
@@ -34,6 +36,15 @@ function Order() {
             }
         }
     }
+   
+    function ChangeOrderDisplay(status:any){
+        if(status==="A"){
+           setshowOrders(orders)
+        }
+        else{
+            setshowOrders(orders.filter((order)=>order.status===status))     
+        }
+    }
 
     async function ChangeOrderStatus(uorder:any,status:any){
         const order_id = uorder.order_id
@@ -41,9 +52,9 @@ function Order() {
         const res:any = await axios.put('/api/Order/updateStatus',{order})
         if(res.data[1].success){
             uorder.status=status
-
-            dispatch(UpdateOrderStatusAction(uorder))
             
+            dispatch(UpdateOrderStatusAction(uorder))
+            // ChangeOrderDisplay(status)
         }
         else{
             alert("Invalid order....")
@@ -53,9 +64,16 @@ function Order() {
 
     return (
         <div className="order-container">
-            
+            <div className="select-container">
+                <select className="select" onChange={(e)=>ChangeOrderDisplay(e.target.value)}>
+                    <option value="I">Pending</option>
+                    <option value="R">Ready</option>
+                    <option value="C">Completed</option>
+                    <option value="A">All</option>
+                </select>
+            </div>
             {
-                orders.map(order=>(<div className="order-card">
+                showOrders.map(order=>(<div className="order-card">
                 <div className="order-details">
                     
                     <div>
@@ -73,10 +91,6 @@ function Order() {
                     <div>
                         <span><b>Total Amount: </b></span>
                         <span>{order.total_price}</span>
-                    </div>
-                    <div>
-                        <span><b>Status: </b></span>
-                        <span>{order.status}</span>
                     </div>
                 </div>
                 {
