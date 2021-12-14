@@ -21,13 +21,13 @@ function Order() {
 
     useEffect(() => {
         RetrieveOrder()
-        setshowOrders(orders)
     }, [])
     
     async function RetrieveOrder(){
         const res:any = await axios.get('/api/Order/retrieveOrder')
         console.log(res.data[0])
         dispatch(RetrieveOrderAction(res.data[0]))
+        setshowOrders(res.data[0])
     }
 
     function findItemName(order:any,item:any){
@@ -67,10 +67,10 @@ function Order() {
         <div className="order-container">
             <div className="select-container">
                 <select className="select" onChange={(e)=>ChangeOrderDisplay(e.target.value)}>
-                    <option value="I">Pending</option>
+                    <option value="A">All</option>
                     <option value="R">Ready</option>
                     <option value="C">Completed</option>
-                    <option value="A">All</option>
+                    <option value="I">Pending</option>
                 </select>
             </div>
             {
