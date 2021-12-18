@@ -42,8 +42,9 @@ const supabase = createClient('https://bskteeklvsixrtwmuqbp.supabase.co','eyJhbG
 global.supabase=supabase
 
 async function checkOrdersUpdate(){
-    var orders = await supabase.from('orders').select(`*,students(*),order_items(*),item(*)`).order('order_id',{ascending:false})
-    io.emit("Order",orders)
+    var ord = await supabase.from('orders').select(`*,students(*),order_items(*),item(*)`).order('order_id',{ascending:false})
+    console.log(ord)
+    io.emit("Order",ord)
 }
 
 server.listen(PORT,()=>{

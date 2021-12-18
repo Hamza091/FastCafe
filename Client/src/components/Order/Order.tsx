@@ -9,6 +9,8 @@ import { IOrder } from '../../redux/Interface/Order'
 import socketIOClient from "socket.io-client";
 import {RetrieveItemsAction} from '../../redux/actions/RetrieveItemsAction'
 const ENDPOINT = "https://fastcafe091.herokuapp.com/";
+// const ENDPOINT = "http://localhost:8000/";
+
 
 function Order() {
     
