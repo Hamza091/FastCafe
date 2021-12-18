@@ -8,7 +8,7 @@ import { UpdateOrderStatusAction } from '../../redux/actions/UpdateOrderStatusAc
 import { IOrder } from '../../redux/Interface/Order'
 import socketIOClient from "socket.io-client";
 import {RetrieveItemsAction} from '../../redux/actions/RetrieveItemsAction'
-const ENDPOINT = "http://localhost:8000";
+const ENDPOINT = "https://fastcafe091.herokuapp.com/";
 
 function Order() {
     
