@@ -6,6 +6,9 @@ import { RootState } from '../../redux/store'
 import { RetrieveOrderAction } from '../../redux/actions/RetrieveOrderAction'
 import { UpdateOrderStatusAction } from '../../redux/actions/UpdateOrderStatusAction'
 import { IOrder } from '../../redux/Interface/Order'
+import socketIOClient from "socket.io-client";
+import {RetrieveItemsAction} from '../../redux/actions/RetrieveItemsAction'
+const ENDPOINT = "http://localhost:8000";
 
 function Order() {
     
@@ -21,7 +24,21 @@ function Order() {
 
     useEffect(() => {
         RetrieveOrder()
+        const socket = socketIOClient(ENDPOINT);
+        socket.on("Order",(orders)=>HandleOrderChange(orders))
+
     }, [])
+
+    async function HandleOrderChange(orders:any){
+            dispatch(RetrieveOrderAction(orders.data))
+            setshowOrders(orders.data)
+
+            //Order is placed so items quantity must also update
+        
+            const items:any = await axios.get('/api/Item/retrieveItem')
+            dispatch(RetrieveItemsAction(items.data[0]))
+            
+    }
     
     async function RetrieveOrder(){
         const res:any = await axios.get('/api/Order/retrieveOrder')

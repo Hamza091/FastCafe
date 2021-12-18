@@ -3,7 +3,7 @@ async function retrieveOrder(req,res){
     let data
     try{
         
-        var orders = await db.from('orders').select(`*,students(*),order_items(*),item(*)`)
+        var orders = await db.from('orders').select(`*,students(*),order_items(*),item(*)`).order('order_id',{ascending:false})
         console.log(orders)
         
         

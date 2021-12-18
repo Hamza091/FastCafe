@@ -9,7 +9,7 @@ async function Login (req,res){
     let data //data to be send will be stored in this
     try{
         var user = await db.from(tableName).select(`*`).match({email:loginCredentials.email,password:loginCredentials.password}).limit(1)
-        // console.log(user)
+        console.log(user)
     }
     catch(err){
         console.log(err)

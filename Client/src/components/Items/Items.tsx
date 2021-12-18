@@ -102,7 +102,6 @@ function Items() {
         const res:any = await axios.put('/api/Item/updateItem',{item})
         
         if(res.data[1].success){
-            
             dispatch(UpdateItemAction(res.data[0]))
             clean()
             ChangeItemDiv('none')
@@ -114,12 +113,13 @@ function Items() {
         }
     }
 
-    async function DeleteItem(item_id:number){
-        const item = JSON.stringify({item_id})
-        const res:any = await axios.delete('/api/Item/deleteItem',{params:{item}})
+    async function DeleteItem(item:Iitem){
+        let item_id:any = item.item_id
+        item_id = JSON.stringify({item_id})
+        const res:any = await axios.put('/api/Item/deleteItem',{item_id})
         if(res.data[1].success){
-            
-            dispatch(DeleteItemAction(item_id))
+            item.available_qty=0
+            dispatch(UpdateItemAction(item))
             alert('Item Deleted...')
         }
         else{
@@ -210,7 +210,7 @@ function Items() {
                             <td>
                             <div className="btn-container">
                                 <button className="btn btn-primary btn-lg btn-wid" onClick={()=>HandleUpdateItem(item)}>Update</button>
-                                <button className="btn btn-danger btn-lg btn-wid" onClick={()=>DeleteItem(item.item_id)}>Delete</button>
+                                <button className="btn btn-danger btn-lg btn-wid" onClick={()=>DeleteItem(item)}>Delete</button>
                             </div>
                         </td>
                         </tr>)
@@ -233,11 +233,11 @@ function Items() {
                 </div>
                 <div className="itm-lbl">
                     <label >Price: </label>
-                    <input type="number" className="itm-input" value={price}  onChange={(e)=>{setPrice(parseInt(e.target.value))}}/>
+                    <input type="number" className="itm-input" min="0" value={price}  onChange={(e)=>{setPrice(parseInt(e.target.value))}}/>
                 </div>
                 <div className="itm-lbl">
                     <label >Quantity: </label>
-                    <input type="number" className="itm-input" value={available_qty} onChange={(e)=>{setAvailableQty(parseInt(e.target.value))}}/>
+                    <input type="number" className="itm-input" min="0" value={available_qty} onChange={(e)=>{setAvailableQty(parseInt(e.target.value))}}/>
                 </div>
                 
                 <div className="itm-lbl">
