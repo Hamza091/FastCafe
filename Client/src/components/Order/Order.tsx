@@ -28,12 +28,14 @@ function Order() {
         RetrieveOrder()
         const socket = socketIOClient(ENDPOINT);
         socket.on("Order",(orders)=>HandleOrderChange(orders))
+        // socket.on("Order",(orders)=>console.log(orders))
 
     }, [])
 
-    async function HandleOrderChange(orders:any){
-            dispatch(RetrieveOrderAction(orders.data))
-            setshowOrders(orders.data)
+    async function HandleOrderChange(orders:Array<IOrder>){
+            // console.log(orders)
+            dispatch(RetrieveOrderAction(orders))
+            setshowOrders(orders)
 
             //Order is placed so items quantity must also update
         
@@ -44,7 +46,7 @@ function Order() {
     
     async function RetrieveOrder(){
         const res:any = await axios.get('/api/Order/retrieveOrder')
-        console.log(res.data[0])
+        // console.log(res.data[0])
         dispatch(RetrieveOrderAction(res.data[0]))
         setshowOrders(res.data[0])
     }
@@ -102,7 +104,7 @@ function Order() {
                     </div>
                     <div>
                         <span><b>Name: </b></span>
-                        <span>{order.students.first_name}</span>
+                        <span>{order.students?.first_name}</span>
                     </div>
                     <div>
                         <span><b>Description: </b></span>

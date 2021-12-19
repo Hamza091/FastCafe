@@ -44,7 +44,7 @@ global.supabase=supabase
 async function checkOrdersUpdate(){
     var ord = await supabase.from('orders').select(`*,students(*),order_items(*),item(*)`).order('order_id',{ascending:false})
     console.log(ord)
-    io.emit("Order",ord)
+    io.emit("Order",ord.data)
 }
 
 server.listen(PORT,()=>{
