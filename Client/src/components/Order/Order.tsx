@@ -71,7 +71,7 @@ function Order() {
     function convertDate(date:any){
         const d = new Date(date)
         // console.log(d.getTime)
-        const dat =d.getDate()+"-"+d.getMonth()+"-"+d.getFullYear()
+        const dat =d.getDate()+"-"+d.getMonth()+"-"+d.getFullYear()+" "+d.getHours()+":"+d.getMinutes()
         return (dat)
     }
 
