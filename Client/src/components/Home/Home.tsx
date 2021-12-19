@@ -53,11 +53,11 @@ function Home() {
                         <th>Category</th>
                     </tr>
                     {
-                        Items.map((item)=><tr>
+                        Items.map((item)=><tr className={item.available_qty<5?"displayRed":"normal"}>
                             <td>{item.item_id}</td>
                             <td>{item.iname}</td>
                             <td>{item.price}</td>
-                            <td>{item.available_qty}</td>
+                            <td >{item.available_qty}</td>
                             <td>
                                 <select >
                                     {

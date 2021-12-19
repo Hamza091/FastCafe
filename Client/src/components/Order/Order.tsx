@@ -73,10 +73,11 @@ function Order() {
         const order= JSON.stringify({order_id,status})
         const res:any = await axios.put('/api/Order/updateStatus',{order})
         if(res.data[1].success){
+            const prevStatus = uorder.status
             uorder.status=status
             
             dispatch(UpdateOrderStatusAction(uorder))
-            // ChangeOrderDisplay(status)
+            ChangeOrderDisplay(prevStatus)
         }
         else{
             alert("Invalid order....")
@@ -118,7 +119,7 @@ function Order() {
                 {
                     order.order_items.map(itm=><div className="order-items">
                     <div>
-                        <span><b>Item Name: </b></span>
+                        <span><b>Item Name: </b></span> 
                         <span>{findItemName(order,itm)}</span>
                     </div>
                     <div>
@@ -129,6 +130,7 @@ function Order() {
                         <span><b>Price: </b></span>
                         <span>{itm.price}</span>
                     </div>
+                    <br/>
                 </div>)
                 }
                 {

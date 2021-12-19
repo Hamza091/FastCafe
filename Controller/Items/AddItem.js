@@ -5,7 +5,7 @@ async function addItem(req,res){
     let data
     try{
         var item = await db.from('item').insert(
-            [{iname:itemDetails.iname,price:itemDetails.price,available_qty:itemDetails.available_qty,rating:0}])
+            [{iname:itemDetails.iname,price:itemDetails.price,available_qty:itemDetails.available_qty}])
         console.log(item)
             // {
             //     item_id:2,

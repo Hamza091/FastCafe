@@ -83,4 +83,10 @@
         background-color: rgb(61, 201, 61);
         width: 18.5%;
     }
-    
+    .displayRed{
+      border-left:3px solid rgb(228, 90, 65);
+      /* border: 1px solid green; */
+    }
+    .normal{
+      border-left:3px solid rgb(61, 201, 61);
+    }
