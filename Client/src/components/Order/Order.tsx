@@ -68,6 +68,13 @@ function Order() {
         }
     }
 
+    function convertDate(date:any){
+        const d = new Date(date)
+        // console.log(d.getTime)
+        const dat =d.getDate()+"-"+d.getMonth()+"-"+d.getFullYear()
+        return (dat)
+    }
+
     async function ChangeOrderStatus(uorder:any,status:any){
         const order_id = uorder.order_id
         const order= JSON.stringify({order_id,status})
@@ -114,6 +121,10 @@ function Order() {
                     <div>
                         <span><b>Total Amount: </b></span>
                         <span>{order.total_price}</span>
+                    </div>
+                    <div>
+                        <span><b>Start Date: </b></span>
+                        <span>{convertDate(order.start_date)}</span>
                     </div>
                 </div>
                 {
